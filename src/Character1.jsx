@@ -7,19 +7,19 @@ import * as THREE from "three";
 import { Mesh } from "three";
 
 
-
+export const activeAnimation= {
+ 
+  forward: false,
+  backward: false,
+  left: false,
+  right: false,
+  run: false,
+ 
+};
 
 const Character = ({ camera }) => {
   const character = useRef()
-  const activeAnimation= {
- 
-    forward: false,
-    backward: false,
-    left: false,
-    right: false,
-    run: false,
-   
-  };
+
 
   const animations = {};
 

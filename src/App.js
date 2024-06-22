@@ -7,9 +7,9 @@ import Character from "./Character1";
 import { Debug, Physics } from "@react-three/cannon";
 import Ground from "./Collider/Ground";
 import Question from "./UI/Question";
-
+import Nipple from 'react-nipple';
 import {   Html, Text as DreiText, Loader } from '@react-three/drei';
-
+import { activeAnimation } from "./Character1";
 
 function Hall() {
   const { scene } = useGLTF('./hallwb.glb', true);  // Use true to automatically resolve the scene
@@ -25,7 +25,50 @@ function Hall() {
 
 
 function App() {
-  
+  const JoyStrikStart=(data)=>{
+    console.log("data",data)
+    
+
+if(data&&data.direction&&data.direction.angle=="up"){
+  activeAnimation.forward=true
+  activeAnimation.backward=false
+  activeAnimation.left=false
+  activeAnimation.right=false
+   
+}
+
+if(data.direction&&data.direction.angle=="right"){
+  activeAnimation.forward=true
+  activeAnimation.backward=false
+  activeAnimation.left=false
+  activeAnimation.right=true
+}
+
+if(data.direction&&data.direction.angle=="left"){
+  activeAnimation.forward=true
+  activeAnimation.backward=false
+  activeAnimation.left=true
+  activeAnimation.right=false
+}
+if(data.direction&&data.direction.angle=="down"){
+ 
+
+  activeAnimation.forward=false
+  activeAnimation.backward=true
+  activeAnimation.left=false
+  activeAnimation.right=false
+}
+
+  }
+
+  const JoyStrikEnd=(d)=>{
+
+    activeAnimation.forward=false
+    activeAnimation.backward=false
+    activeAnimation.left=false
+    activeAnimation.right=false
+
+  }
   const hemiLight = new THREE.HemisphereLight(0xffffff, 0xfffffff, 0.6);
   hemiLight.color.setHSL(0.6, 1, 0.6);
   hemiLight.groundColor.setHSL(0.095, 1, 0.75);
@@ -85,7 +128,22 @@ function App() {
 
   
   
-    
+      <Nipple
+        options={{ mode: 'static', position: { bottom: '50px', left: '50px' } }}
+        style={{
+            width: 100,
+            height: 100,
+            position: 'absolute',
+            bottom: '50px',
+            left: '50px',
+        }}
+        onMove={(evt, data) => {
+            if (data && data) {
+              JoyStrikStart(data);
+            }
+        }}
+        onEnd={(e,d) => JoyStrikEnd(d)}
+        />
   
     </div>
   );
