@@ -14,7 +14,13 @@ useEffect(() => {
       setApiData(data);
       setIsLoading(false);
     })
-    .catch(error => console.error('Error fhttps://bermudaunicorn.com/api/beuapi.php?type=fetchquestion&que=Which-city-is-known-as-the-Pink-Cityetching data:', error));
+    .catch(error => {
+      
+      setApiData(["Error While Fetcing Data"])
+      console.error( error)
+    
+    
+    });
 }, []);
 
 const fetchNextApiData = () => {
@@ -26,7 +32,7 @@ const fetchNextApiData = () => {
       setApiData(data);
       setIsLoading(false);
     })
-    .catch(error => {
+    .catch(error => {apiData
       console.error('Error fetching next data:', error);
       setIsLoading(false);
     });
@@ -51,7 +57,7 @@ function ApiDataDisplay1( ) {
           <div style={{ color: 'white', fontSize: '18px' }}>Loading...</div>
         ) : (
           <div  /* onClick={(e)=>{localStorage.setItem("modal",true)}} */  style={{ maxHeight: '134px',width:"247px", overflowY: 'auto', color: 'white' }}>
-           <p>Hey, I am Aniruddhsinh Jadeja. This is a test text.</p>
+           <p>{apiData}</p>
           </div>
         )}
       </Html>
