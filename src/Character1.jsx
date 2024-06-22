@@ -18,7 +18,7 @@ const Character = ({ camera }) => {
     left: false,
     right: false,
     run: false,
-    dance: false,
+   
   };
 
   const animations = {};
@@ -29,7 +29,7 @@ const Character = ({ camera }) => {
   const acceleration = new THREE.Vector3(1, 0.125, 100.0);
   const velocity = new THREE.Vector3(0, 0, 0);
 
-  const c = useLoader(FBXLoader, "./character/character.fbx");
+  const c = useLoader(FBXLoader, "./character/character2.fbx");
 console.log("ccccccccccc",c.node)
   
 
@@ -41,7 +41,7 @@ console.log("ccccccccccc",c.node)
 
   const mixer = new THREE.AnimationMixer(c);
 
-  const idle = useFBX("./character/idle.fbx");
+  const idle = useFBX("./character/Idle.fbx");
 
   animations["idle"] = {
     clip: mixer.clipAction(idle.animations[0]),
@@ -59,12 +59,7 @@ console.log("ccccccccccc",c.node)
     clip: mixer.clipAction(run.animations[0]),
   };
 
-  const dance = useFBX("./character/dance.fbx");
-
-  animations["dance"] = {
-    clip: mixer.clipAction(dance.animations[0]),
-  };
-
+ 
   // set current Action
   let currAction = animations["idle"].clip;
 
@@ -93,9 +88,7 @@ console.log("ccccccccccc",c.node)
 
         break;
 
-      case 69: //e dance
-        activeAnimation.dance = true;
-
+     
         break;
       case 16: // shift
         activeAnimation.run = true;
@@ -121,10 +114,7 @@ console.log("ccccccccccc",c.node)
         activeAnimation.right = false;
         break;
 
-      case 69: //e dance
-        activeAnimation.dance = false;
-        break;
-
+   
       case 16: // shift
         activeAnimation.run = false;
         break;
@@ -182,9 +172,7 @@ console.log("ccccccccccc",c.node)
       acc.multiplyScalar(2.0);
     }
 
-    if (currAction === animations["dance"].clip) {
-      acc.multiplyScalar(0.0);
-    }
+
 
     if (activeAnimation.forward) {
       newVelocity.z += 5 * delta;
@@ -254,8 +242,6 @@ console.log("ccccccccccc",c.node)
       } else {
         currAction = animations["walk"].clip;
       }
-    } else if (activeAnimation.dance) {
-      currAction = animations["dance"].clip;
     } else {
       currAction = animations["idle"].clip;
     }

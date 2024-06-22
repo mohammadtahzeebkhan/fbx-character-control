@@ -74,11 +74,12 @@ function App() {
             <Character camera={camera}  /> 
                       </Debug>
           </Physics>
-    
-        </Suspense>
-        <DreiText position={[3.5, 2, -11]} rotation={[0, 0, 0]} fontSize={1} bevelEnabled bevelThickness={1} bevelSize={2}>
+          <DreiText position={[3.5, 2, -11]} rotation={[0, 0, 0]} fontSize={1} bevelEnabled bevelThickness={1} bevelSize={2}>
 <Question/>
 </DreiText>
+    
+        </Suspense>
+  
 
       </Canvas>
 
